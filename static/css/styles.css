@@ -49,13 +49,13 @@ body {
 
 /* Front face styles */
 .front {
-    background-color: #00bcd4; /* Blue for front */
+    background-color: #007bff; /* Blue for front */
     color: white;
 }
 
 /* Back face styles */
 .back {
-    background-color: #4caf50; /* Green for back */
+    background-color: #01b007; /* Green for back */
     color: white;
     transform: rotateY(180deg); /* Rotate back face by 180 degrees */
 }
@@ -78,13 +78,20 @@ button {
     transition: background-color 0.3s;
 }
 
+button.finish-button {
+    position: flex;
+    background-color: #01545f;
+}
+
 button:hover {
     background-color: #008c9e;
 }
 
+
+
 /* Reveal and navigation button styling */
 #reveal-btn {
-    background-color: #4caf50;
+    background-color: #01b007;
 }
 
 /* Styles for both card forms */
@@ -99,7 +106,7 @@ button:hover {
 
 /* Input fields */
 .card input[type="text"] {
-    width: calc(100% - 20px); /* Full width minus padding */
+    width: calc(80% - 20px); /* Full width minus padding */
     padding: 10px; /* Inner padding for input */
     margin: 10px 0; /* Margin for spacing between elements */
     border: 1px solid #ccc; /* Light gray border */

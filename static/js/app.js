@@ -11,8 +11,30 @@ function startStudy() {
       flashcards = data;
       currentIndex = 0;
       document.getElementById("study-container").style.display = "block";
+      document.getElementById("add-flashcard-form").style.display = "none";
+      document.getElementById("delete-flashcard-form").style.display = "none";
       displayFlashcard();
     });
+}
+
+// Function to Start adding card
+function startAddingCard() {
+  document.getElementById("study-container").style.display = "none";
+  document.getElementById("add-flashcard-form").style.display = "block";
+  document.getElementById("delete-flashcard-form").style.display = "none";
+}
+
+// Function to Start deleting card
+function startDeletingCard() {
+  document.getElementById("study-container").style.display = "none";
+  document.getElementById("add-flashcard-form").style.display = "none";
+  document.getElementById("delete-flashcard-form").style.display = "block";
+}
+
+function finishFunctions() {
+  document.getElementById("study-container").style.display = "none";
+  document.getElementById("add-flashcard-form").style.display = "none";
+  document.getElementById("delete-flashcard-form").style.display = "none";
 }
 
 // Function to display the current flashcard

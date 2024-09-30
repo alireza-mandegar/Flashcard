@@ -18,28 +18,41 @@
                 <div id="answer" class="card-face back"></div>
             </div>
         </div>
-        <button id="reveal-btn">Reveal Answer</button>
         <button id="prev-btn">Previous</button>
+        <button id="reveal-btn">Reveal Answer</button>
         <button id="next-btn">Next</button>
     </div>
-    
-    
-    <!-- Trigger to Start Study Mode -->
-    <button onclick="startStudy()">Start Study Session</button>
 
-    <div id="add-flashcard-form" class="card">
+    <div id="add-flashcard-form" class="card" style="display: none;">
         <h3>Add New Flashcard</h3>
         <input type="text" id="new-question" placeholder="Enter question" required>
         <input type="text" id="new-answer" placeholder="Enter answer" required>
-        <button id="add-card-btn">Add Flashcard</button>
-    </div>
-    
-    <div id="delete-flashcard-form" class="card">
-        <h3>Delete Flashcard</h3>
-        <input type="text" id="delete-card-id" placeholder="Enter card ID" required>
-        <button id="delete-card-btn">Delete Flashcard</button>
+        <div><button id="add-card-btn">Add Flashcard</button></div>
     </div>
 
+    <div id="delete-flashcard-form" class="card" style="display: none;">
+        <h3>Delete Flashcard</h3>
+        <input type="text" id="delete-card-id" placeholder="Enter card ID" required>
+        <div><button id="delete-card-btn">Delete Flashcard</button></div>
+    </div>
+    
+    <div>
+    <!-- Trigger to Start Study Mode -->
+    <button onclick="startStudy()">Start Study Session</button>
+
+    <!-- Trigger to Start adding card -->
+    <button onclick="startAddingCard()">Start Adding a card</button>
+
+    <!-- Trigger to Start deleting card -->
+    <button onclick="startDeletingCard()">Start deleting a card</button>
+    </div>
+
+    <div>
+    <!-- Trigger to Finish all Functions -->
+    <button class="finish-button" onclick="finishFunctions()">Finish</button>
+    </div>
+    
+    
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>
