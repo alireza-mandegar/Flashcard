@@ -37,5 +37,13 @@ def study_flashcards():
     random_flashcards = random.sample(flashcards_serialized, min(len(flashcards_serialized), 5))  # Pick 5 random flashcards
     return jsonify(random_flashcards)
 
+@app.route('/delete_flashcard', methods=['DELETE'])
+def delete_flashcard():
+    card_question = request.json.get('question')  # Get the question from the request
+    manager.delete_flashcard(card_question)
+    return jsonify({'message': 'Flashcard deleted successfully!'})
+    
+
+
 if __name__ == '__main__':
     app.run(debug=True)

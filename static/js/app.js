@@ -54,3 +54,45 @@ document.getElementById("prev-btn").addEventListener("click", function () {
     alert("You're at the first flashcard!");
   }
 });
+
+// Function to add a new flashcard
+document.getElementById("add-card-btn").addEventListener("click", function () {
+  const question = document.getElementById("new-question").value;
+  const answer = document.getElementById("new-answer").value;
+
+  fetch("/add_flashcard", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ question, answer }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      alert(data.message);
+      document.getElementById("new-question").value = ""; // Clear input
+      document.getElementById("new-answer").value = ""; // Clear input
+    })
+    .catch((error) => console.error("Error:", error));
+});
+
+// Function to delete a flashcard
+document
+  .getElementById("delete-card-btn")
+  .addEventListener("click", function () {
+    const question = document.getElementById("delete-card-id").value;
+
+    fetch("/delete_flashcard", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ question }), // Send the question in the body
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        alert(data.message);
+        document.getElementById("delete-card-id").value = ""; // Clear input
+      })
+      .catch((error) => console.error("Error:", error));
+  });
