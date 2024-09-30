@@ -60,6 +60,16 @@ document.getElementById("add-card-btn").addEventListener("click", function () {
   const question = document.getElementById("new-question").value;
   const answer = document.getElementById("new-answer").value;
 
+  if (!question) {
+    alert("Please enter a question to add a flashcard."); // Alert user to enter a question
+    return; // Exit the function if input is empty
+  }
+
+  if (!answer) {
+    alert("Please enter a answer to add a flashcard."); // Alert user to enter a answer
+    return; // Exit the function if input is empty
+  }
+
   fetch("/add_flashcard", {
     method: "POST",
     headers: {
@@ -81,6 +91,11 @@ document
   .getElementById("delete-card-btn")
   .addEventListener("click", function () {
     const question = document.getElementById("delete-card-id").value;
+
+    if (!question) {
+      alert("Please enter a question to delete a flashcard."); // Alert user to enter a question
+      return; // Exit the function if input is empty
+    }
 
     fetch("/delete_flashcard", {
       method: "DELETE",
