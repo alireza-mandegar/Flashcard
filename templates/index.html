@@ -8,13 +8,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <h1>Flashcard Application</h1>
-    
+    <h1>Interactive Flashcard Study</h1>
+
     <!-- Study Mode Section -->
     <div id="study-container" style="display: none;">
-        <div id="flashcard">
-            <div id="question"></div>
-            <div id="answer" style="display: none;"></div>
+        <div class="flashcard">
+            <div class="card-content">
+                <div id="question" class="card-face front"></div>
+                <div id="answer" class="card-face back"></div>
+            </div>
         </div>
         <button id="reveal-btn">Reveal Answer</button>
         <button id="prev-btn">Previous</button>

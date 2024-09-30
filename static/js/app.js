@@ -17,20 +17,22 @@ function startStudy() {
 
 // Function to display the current flashcard
 function displayFlashcard() {
-  if (flashcards.length === 0) {
-    alert("No flashcards available for study.");
-    return;
-  }
+  const question = flashcards[currentIndex].question;
+  const answer = flashcards[currentIndex].answer;
 
-  const flashcard = flashcards[currentIndex];
-  document.getElementById("question").innerText = flashcard.question;
-  document.getElementById("answer").innerText = flashcard.answer;
-  document.getElementById("answer").style.display = "none"; // Hide answer initially
+  // Update the question and answer on the flashcard
+  document.getElementById("question").innerText = question;
+  document.getElementById("answer").innerText = answer;
+
+  // Reset card to front
+  const flashcardElement = document.querySelector(".flashcard");
+  flashcardElement.classList.remove("flipped"); // Ensure the card starts unflipped
 }
 
-// Event listener to reveal the answer
+// Event listener to flip the card (reveal answer)
 document.getElementById("reveal-btn").addEventListener("click", function () {
-  document.getElementById("answer").style.display = "block"; // Show answer
+  const flashcardElement = document.querySelector(".flashcard");
+  flashcardElement.classList.toggle("flipped"); // Add or remove the 'flipped' class
 });
 
 // Event listener for the "Next" button
