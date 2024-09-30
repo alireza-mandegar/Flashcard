@@ -1,19 +1,16 @@
 /* static/css/styles.css */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-}
-
-h1 {
-    color: #333;
-}
-
-#flashcard-container {
+#study-container {
     margin-top: 20px;
+    text-align: center;
 }
 
-#flashcard-form {
+#flashcard {
     margin-bottom: 20px;
+}
+
+#question, #answer {
+    font-size: 1.5em;
+    padding: 20px;
+    border: 1px solid #333;
+    background-color: #f9f9f9;
 }

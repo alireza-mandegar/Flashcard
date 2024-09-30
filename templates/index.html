@@ -4,20 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flashcard App</title>
+    <title>Flashcard App - Study Mode</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <h1>Flashcard Application</h1>
-    <div id="flashcard-container"></div>
+    
+    <!-- Study Mode Section -->
+    <div id="study-container" style="display: none;">
+        <div id="flashcard">
+            <div id="question"></div>
+            <div id="answer" style="display: none;"></div>
+        </div>
+        <button id="reveal-btn">Reveal Answer</button>
+        <button id="prev-btn">Previous</button>
+        <button id="next-btn">Next</button>
+    </div>
+    
+    <!-- Trigger to Start Study Mode -->
+    <button onclick="startStudy()">Start Study Session</button>
 
-    <form id="flashcard-form">
-        <input type="text" id="question" placeholder="Question" required>
-        <input type="text" id="answer" placeholder="Answer" required>
-        <button type="submit">Add Flashcard</button>
-    </form>
-
-    <button onclick="fetchFlashcards()">Show All Flashcards</button>
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>
