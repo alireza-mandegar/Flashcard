@@ -1,0 +1,19 @@
+/* static/css/styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+#flashcard-container {
+    margin-top: 20px;
+}
+
+#flashcard-form {
+    margin-bottom: 20px;
+}
