@@ -14,10 +14,9 @@ body {
 
 /* Flashcard container */
 .flashcard {
-    width: 300px;
     height: 200px;
     perspective: 1000px; /* Perspective for 3D effect */
-    margin-bottom: 20px;
+    margin: 10px 35% 30px 35%;
 }
 
 /* Card content with flip effect */
