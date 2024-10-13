@@ -21,20 +21,18 @@ function startStudy() {
 // minus button for decrease score
 document.getElementById("minus-btn").addEventListener("click", function () {
   --counter;
-  if (counter === -1) {
-    document.getElementById("minus-btn").disabled = true;
-  }
+  updateButtonStates();
 
-  if (counter === 0) {
-    document.getElementById("plus-btn").disabled = false;
-  }
+  document.getElementById("score-display").innerText =
+    flashcards[currentIndex].score - 1;
 
-  fetch("/flashcard_score", {
+  const question = flashcards[currentIndex].question;
+  fetch("/decrease_score", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ number: -1 }),
+    body: JSON.stringify({ question }),
   })
     .then((response) => response.json())
     .then((data) => console.log(data.message))
@@ -44,25 +42,29 @@ document.getElementById("minus-btn").addEventListener("click", function () {
 // plus button for increase score
 document.getElementById("plus-btn").addEventListener("click", function () {
   ++counter;
-  if (counter === 1) {
-    document.getElementById("plus-btn").disabled = true;
-  }
+  updateButtonStates();
 
-  if (counter === 0) {
-    document.getElementById("minus-btn").disabled = false;
-  }
+  document.getElementById("score-display").innerText =
+    flashcards[currentIndex].score + 1;
 
-  fetch("/flashcard_score", {
+  const question = flashcards[currentIndex].question;
+  fetch("/increase_score", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ number: 1 }),
+    body: JSON.stringify({ question }),
   })
     .then((response) => response.json())
     .then((data) => console.log(data.message))
     .catch((error) => console.error("Error:", error));
 });
+
+// Helper function to update button states based on the counter
+function updateButtonStates() {
+  document.getElementById("minus-btn").disabled = counter == -1;
+  document.getElementById("plus-btn").disabled = counter == 1;
+}
 
 // Function to Start adding card
 function startAddingCard() {
@@ -89,9 +91,16 @@ function displayFlashcard() {
   const question = flashcards[currentIndex].question;
   const answer = flashcards[currentIndex].answer;
 
+  updateButtonStates();
+
+  let score = flashcards[currentIndex].score || 0;
+
   // Update the question and answer on the flashcard
   document.getElementById("question").innerText = question;
   document.getElementById("answer").innerText = answer;
+
+  // Update the displayed score
+  document.getElementById("score-display").innerText = score;
 
   // Reset card to front
   const flashcardElement = document.querySelector(".flashcard");
