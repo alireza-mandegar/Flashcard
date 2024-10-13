@@ -1,9 +1,9 @@
 # flashcard.py
 class Flashcard:
-    def __init__(self, question: str, answer: str, tags: list = None):
+    def __init__(self, question: str, answer: str, score: int = 0):
         self.question = question
         self.answer = answer
-        self.tags = tags or []
+        self.score = score
 
     def to_dict(self):
         """
@@ -12,5 +12,5 @@ class Flashcard:
         return {
             'question': self.question,
             'answer': self.answer,
-            'tags': self.tags
+            'score': self.score
         }
