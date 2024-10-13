@@ -8,11 +8,11 @@ class FlashcardManager:
         # Connect to MongoDB using the Database layer
         self.db = Database('flashcards_db', 'flashcards')
 
-    def add_flashcard(self, question: str, answer: str, tags: list = None):
+    def add_flashcard(self, question: str, answer: str, score: int = 0):
         """
         Adds a new flashcard to the database.
         """
-        flashcard = Flashcard(question=question, answer=answer, tags=tags)
+        flashcard = Flashcard(question=question, answer=answer, score=score)
         result = self.db.insert_flashcard(flashcard.to_dict())
         print(f"Flashcard added with id: {result.inserted_id}")
 
@@ -55,3 +55,23 @@ class FlashcardManager:
                 print(f"Question: {flashcard['question']}, Answer: {flashcard['answer']}")
         else:
             print("No matching flashcards found.")
+
+    def increase_flashcard_score(self, question: str):
+        """
+        Increases the score of a flashcard by 1 based on the question.
+        """
+        result = self.db.increase_score(question)
+        if result.modified_count > 0:
+            print("Score increased successfully.")
+        else:
+            print("Flashcard not found.")
+
+    def decrease_flashcard_score(self, question: str):
+        """
+        Decreases the score of a flashcard by 1 based on the question.
+        """
+        result = self.db.decrease_score(question)
+        if result.modified_count > 0:
+            print("Score decreased successfully.")
+        else:
+            print("Flashcard not found.")

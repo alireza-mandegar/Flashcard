@@ -35,3 +35,21 @@ class Database:
                 {'answer': {'$regex': keyword, '$options': 'i'}}
             ]
         }))
+
+    def increase_score(self, question: str):
+        """
+        Increases the score of a flashcard by 1 based on the question.
+        """
+        return self.collection.update_one(
+            {'question': question},
+            {'$inc': {'score': 1}}
+        )
+
+    def decrease_score(self, question: str):
+        """
+        Decreases the score of a flashcard by 1 based on the question.
+        """
+        return self.collection.update_one(
+            {'question': question},
+            {'$inc': {'score': -1}}
+        )

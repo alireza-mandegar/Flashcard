@@ -24,6 +24,26 @@ def get_flashcards():
     flashcards = manager.db.get_all_flashcards()
     return jsonify(flashcards)
 
+@app.route('/increase_score', methods=['POST'])
+def increase_score():
+    data = request.get_json()
+    question = data.get('question')
+    if not question:
+        return jsonify({'error': 'Question is required'}), 400
+    
+    result = manager.increase_flashcard_score(question)
+    return jsonify({'message': 'Score increased successfully!' if result else 'Flashcard not found.'})
+
+@app.route('/decrease_score', methods=['POST'])
+def decrease_score():
+    data = request.get_json()
+    question = data.get('question')
+    if not question:
+        return jsonify({'error': 'Question is required'}), 400
+
+    result = manager.decrease_flashcard_score(question)
+    return jsonify({'message': 'Score decreased successfully!' if result else 'Flashcard not found.'})
+
 @app.route('/study_flashcards', methods=['GET'])
 def study_flashcards():
     flashcards = manager.db.get_all_flashcards() 
@@ -34,7 +54,7 @@ def study_flashcards():
         flashcard['_id'] = str(flashcard['_id'])  # Convert ObjectId to string
         flashcards_serialized.append(flashcard)
 
-    random_flashcards = random.sample(flashcards_serialized, min(len(flashcards_serialized), 5))  # Pick 5 random flashcards
+    random_flashcards = random.sample(flashcards_serialized, min(len(flashcards_serialized), len(flashcards_serialized)))  # Pick 5 random flashcards
     return jsonify(random_flashcards)
 
 @app.route('/delete_flashcard', methods=['DELETE'])
