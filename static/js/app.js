@@ -2,6 +2,7 @@
 
 let flashcards = [];
 let currentIndex = 0;
+let counter = 0;
 
 // Function to start study session
 function startStudy() {
@@ -16,6 +17,52 @@ function startStudy() {
       displayFlashcard();
     });
 }
+
+// minus button for decrease score
+document.getElementById("minus-btn").addEventListener("click", function () {
+  --counter;
+  if (counter === -1) {
+    document.getElementById("minus-btn").disabled = true;
+  }
+
+  if (counter === 0) {
+    document.getElementById("plus-btn").disabled = false;
+  }
+
+  fetch("/flashcard_score", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ number: -1 }),
+  })
+    .then((response) => response.json())
+    .then((data) => console.log(data.message))
+    .catch((error) => console.error("Error:", error));
+});
+
+// plus button for increase score
+document.getElementById("plus-btn").addEventListener("click", function () {
+  ++counter;
+  if (counter === 1) {
+    document.getElementById("plus-btn").disabled = true;
+  }
+
+  if (counter === 0) {
+    document.getElementById("minus-btn").disabled = false;
+  }
+
+  fetch("/flashcard_score", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ number: 1 }),
+  })
+    .then((response) => response.json())
+    .then((data) => console.log(data.message))
+    .catch((error) => console.error("Error:", error));
+});
 
 // Function to Start adding card
 function startAddingCard() {
@@ -61,6 +108,7 @@ document.getElementById("reveal-btn").addEventListener("click", function () {
 document.getElementById("next-btn").addEventListener("click", function () {
   if (currentIndex < flashcards.length - 1) {
     currentIndex++;
+    counter = 0;
     displayFlashcard();
   } else {
     alert("You've reached the end of the flashcards!");
@@ -71,6 +119,7 @@ document.getElementById("next-btn").addEventListener("click", function () {
 document.getElementById("prev-btn").addEventListener("click", function () {
   if (currentIndex > 0) {
     currentIndex--;
+    counter = 0;
     displayFlashcard();
   } else {
     alert("You're at the first flashcard!");
