@@ -32,7 +32,16 @@ def increase_score():
         return jsonify({'error': 'Question is required'}), 400
     
     result = manager.increase_flashcard_score(question)
-    return jsonify({'message': 'Score increased successfully!' if result else 'Flashcard not found.'})
+    
+    # return the new score
+    flashcards = manager.db.get_all_flashcards() 
+    score = 0
+    for flashcard in flashcards:
+        flashcard['_id'] = str(flashcard['_id'])  # Convert ObjectId to string
+        if flashcard['question'] == question:
+            score = str(flashcard['score'])
+
+    return jsonify(score)
 
 @app.route('/decrease_score', methods=['POST'])
 def decrease_score():
@@ -42,7 +51,16 @@ def decrease_score():
         return jsonify({'error': 'Question is required'}), 400
 
     result = manager.decrease_flashcard_score(question)
-    return jsonify({'message': 'Score decreased successfully!' if result else 'Flashcard not found.'})
+    
+    # return the new score
+    flashcards = manager.db.get_all_flashcards() 
+    score = 0
+    for flashcard in flashcards:
+        flashcard['_id'] = str(flashcard['_id'])  # Convert ObjectId to string
+        if flashcard['question'] == question:
+            score = str(flashcard['score'])
+
+    return jsonify(score)
 
 @app.route('/study_flashcards', methods=['GET'])
 def study_flashcards():

@@ -23,9 +23,6 @@ document.getElementById("minus-btn").addEventListener("click", function () {
   --counter;
   updateButtonStates();
 
-  document.getElementById("score-display").innerText =
-    flashcards[currentIndex].score - 1;
-
   const question = flashcards[currentIndex].question;
   fetch("/decrease_score", {
     method: "POST",
@@ -35,7 +32,7 @@ document.getElementById("minus-btn").addEventListener("click", function () {
     body: JSON.stringify({ question }),
   })
     .then((response) => response.json())
-    .then((data) => console.log(data.message))
+    .then((data) => (document.getElementById("score-display").innerText = data))
     .catch((error) => console.error("Error:", error));
 });
 
@@ -43,9 +40,6 @@ document.getElementById("minus-btn").addEventListener("click", function () {
 document.getElementById("plus-btn").addEventListener("click", function () {
   ++counter;
   updateButtonStates();
-
-  document.getElementById("score-display").innerText =
-    flashcards[currentIndex].score + 1;
 
   const question = flashcards[currentIndex].question;
   fetch("/increase_score", {
@@ -56,7 +50,7 @@ document.getElementById("plus-btn").addEventListener("click", function () {
     body: JSON.stringify({ question }),
   })
     .then((response) => response.json())
-    .then((data) => console.log(data.message))
+    .then((data) => (document.getElementById("score-display").innerText = data))
     .catch((error) => console.error("Error:", error));
 });
 
